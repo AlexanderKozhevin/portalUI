@@ -125,6 +125,51 @@
           }
         }
       }
+    },
+    "portal": {
+      "root": "projects/portal",
+      "sourceRoot": "projects/portal/src",
+      "projectType": "library",
+      "prefix": "ui",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/portal/tsconfig.lib.json",
+            "project": "projects/portal/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/portal/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/portal/src/test.ts",
+            "tsConfig": "projects/portal/tsconfig.spec.json",
+            "karmaConfig": "projects/portal/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/portal/tsconfig.lib.json",
+              "projects/portal/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "elements"
